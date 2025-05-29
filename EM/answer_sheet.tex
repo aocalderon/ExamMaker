@@ -1,0 +1,19 @@
+\documentclass[border=2mm]{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\newcommand{\numpoints}{20}  % Define a variable
+
+\begin{tikzpicture}[scale=1.25]
+    \foreach \i in {1,...,\numpoints} {
+        \node at (0, -\i/2) {\textbf{\i}};
+        \foreach \j/\letter in {1/A,2/B,3/C,4/D,5/E} {
+            \draw (\j/2, -\i/2) circle(0.17);
+            \node at (\j/2, -\i/2) {\letter};
+        }
+    }
+    \draw[thick] (0.25, -0.25) rectangle (2.75,-\numpoints/2 - 0.25);
+\end{tikzpicture}
+
+\end{document}

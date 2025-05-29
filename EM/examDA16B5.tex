@@ -1,4 +1,4 @@
-\documentclass[11pt, addpoints]{exam}%\documentclass[11pt, addpoints]{exam}
+\documentclass[11pt, addpoints]{exam}
 %\documentclass[11pt, addpoints, answers]{exam}
 
 \usepackage[utf8]{inputenc}
@@ -11,8 +11,6 @@
     rounded corners,
     arc = 12pt
 }
-\usepackage{gbarcode}
-\usepackage[frame=false,H=1mm,S.6]{makebarcode}
 \usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -46,10 +44,8 @@
 			\begin{tikzpicture}[scale=1.25]
 				\foreach \i in {1,...,\numpoints} {
 					\node at (0, -\i/2) {\textbf{\i}};
-				}
-				\foreach \i in {1,...,\numpoints} {
 					\foreach \j/\letter in {1/A,2/B,3/C,4/D,5/E} {
-						\draw (\j/2, -\i/2) circle(0.2);
+						\draw (\j/2, -\i/2) circle(0.17);
 						\node at (\j/2, -\i/2) {\letter};
 					}
 				}
@@ -59,11 +55,6 @@
 			\vspace{3mm}
 			\leavevmode \hspace{5mm} \codetext{DA16B5}
 		\end{center}
-
-		\begin{center}
-		\end{center}
-
-
 	\end{coverpages}
 
 	\footer{} {Page \thepage\ of \numpages} {\iflastpage{3rd exam.}{Please go on to the next page\ldots}}
@@ -76,26 +67,26 @@
 	\textbf{Code: DA16B5}
 
 	\begin{questions}
-		\input{../DB_Questions/A7}
-		\input{../DB_Questions/C12}
-		\input{../DB_Questions/B6}
-		\input{../DB_Questions/A20}
-		\input{../DB_Questions/B8}
-		\input{../DB_Questions/B2}
-		\input{../DB_Questions/C5}
-		\input{../DB_Questions/B5}
-		\input{../DB_Questions/A14}
-		\input{../DB_Questions/A12}
-		\input{../DB_Questions/A19}
-		\input{../DB_Questions/C7}
-		\input{../DB_Questions/A17}
-		\input{../DB_Questions/B16}
-		\input{../DB_Questions/A3}
-		\input{../DB_Questions/C20}
-		\input{../DB_Questions/C17}
-		\input{../DB_Questions/B9}
-		\input{../DB_Questions/B7}
-		\input{../DB_Questions/B14}
+		\input{DB_Questions/A7}
+		\input{DB_Questions/C12}
+		\input{DB_Questions/B6}
+		\input{DB_Questions/A20}
+		\input{DB_Questions/B8}
+		\input{DB_Questions/B2}
+		\input{DB_Questions/C5}
+		\input{DB_Questions/B5}
+		\input{DB_Questions/A14}
+		\input{DB_Questions/A12}
+		\input{DB_Questions/A19}
+		\input{DB_Questions/C7}
+		\input{DB_Questions/A17}
+		\input{DB_Questions/B16}
+		\input{DB_Questions/A3}
+		\input{DB_Questions/C20}
+		\input{DB_Questions/C17}
+		\input{DB_Questions/B9}
+		\input{DB_Questions/B7}
+		\input{DB_Questions/B14}
 	\end{questions}
 
 

@@ -1,0 +1,49 @@
+%\documentclass[11pt, addpoints]{exam}
+%\documentclass[11pt, addpoints, answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel} % Para idioma español y separación silábica
+\usepackage[many]{tcolorbox} % for COLORED BOXES (tikz and xcolor included)
+\newtcolorbox{MyBox}{
+	fontupper = \bf \color{black}, % font color
+    boxrule = 2pt,
+    colframe = black,
+    rounded corners,
+    arc = 12pt
+}
+\usepackage{qrcode}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=2cm, bottom=3cm}
+
+\begin{document}
+
+	\begin{coverpages}
+		\begin{center}
+			\begin{Large}
+				\vspace{-5mm}
+				DBS 3rd Exam
+			\end{Large}
+		\end{center}
+		\vspace{5mm}
+
+		\begin{MyBox}
+			This exam consists of \numpages{} pages, not including this cover page.  Please go through your copy to make sure that all pages are in good order.  The exam consists of a set of short questions with multiple choices. There are \numpoints{} points, total, on this exam. \\
+			Happy solving!
+		\end{MyBox}
+
+		\vspace{10mm}
+		\noindent
+		Name:\enspace\hrulefill \\
+		\\
+		Date:\enspace\hrulefill
+		\vspace{10mm}
+		\begin{center}
+			\begin{scriptsize}
+				\gradetable[v][questions]
+			\end{scriptsize}
+		\end{center}
+		\vspace{10mm}
+

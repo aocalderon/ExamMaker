@@ -6,7 +6,7 @@ import utils
 ########################################################################
 webCamFeed = True
 pathImage = "5.jpg"
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(10,160)
 heightImg = 700
 widthImg  = 700
@@ -22,7 +22,7 @@ while True:
 
     if webCamFeed:success, img = cap.read()
     else:img = cv2.imread(pathImage)
-    img = cv2.resize(img, (widthImg, heightImg)) # RESIZE IMAGE
+    #img = cv2.resize(img, (widthImg, heightImg)) # RESIZE IMAGE
     imgFinal = img.copy()
     imgBlank = np.zeros((heightImg,widthImg, 3), np.uint8) # CREATE A BLANK IMAGE FOR TESTING DEBUGGING IF REQUIRED
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # CONVERT IMAGE TO GRAY SCALE
@@ -124,8 +124,7 @@ while True:
     lables = [["Original","Gray","Edges","Contours"],
               ["Biggest Contour","Threshold","Warpped","Final"]]
 
-    stackedImage = utils.stackImages(imageArray,0.5,lables)
-    cv2.imshow("Result",stackedImage)
+
 
     # SAVE IMAGE WHEN 's' key is pressed
     if cv2.waitKey(1) & 0xFF == ord('s'):

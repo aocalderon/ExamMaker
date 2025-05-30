@@ -1,15 +1,55 @@
+# Importing library
 import cv2
+from pyzbar.pyzbar import decode
 
-# Load image with a QR code
-image = cv2.imread('qr2.jpg')
+# Make one method to decode the barcode 
+def BarcodeFrame(img):
+    
+    # Decode the barcode image
+    detectedBarcodes = decode(img)
+     
+    # If not detected then print the message
+    if not detectedBarcodes:
+        print("Barcode Not Detected or your barcode is blank/corrupted!")
+    else:
+          # Traverse through all the detected barcodes in image
+        for barcode in detectedBarcodes:
+            # Locate the barcode position in image
+            (x, y, w, h) = barcode.rect
+            
+            # Put the rectangle in image using 
+            # cv2 to highlight the barcode
+            cv2.rectangle(img, (x-10, y-10), (x + w+10, y + h+10), (255, 0, 0), 2)
+            if barcode.data != "":
+                # Print the barcode data
+                print(f"{barcode.data.decode('utf-8')}")
+ 
+# Make one method to decode the barcode 
+def BarcodeReader(image):
+    
+    # read the image in numpy array using cv2
+    img = cv2.imread(image)
+     
+    # Decode the barcode image
+    detectedBarcodes = decode(img)
+     
+    # If not detected then print the message
+    if not detectedBarcodes:
+        print("Barcode Not Detected or your barcode is blank/corrupted!")
+    else:
+          # Traverse through all the detected barcodes in image
+        for barcode in detectedBarcodes:
+            # Locate the barcode position in image
+            (x, y, w, h) = barcode.rect
+            
+            # Put the rectangle in image using 
+            # cv2 to highlight the barcode
+            cv2.rectangle(img, (x-10, y-10), (x + w+10, y + h+10), (255, 0, 0), 2)
+            if barcode.data != "":
+                # Print the barcode data
+                print(f"{barcode.data.decode('utf-8')}")
 
-# Create a QRCode detector
-qr_detector = cv2.QRCodeDetector()
-
-# Detect and decode the QR code
-data, bbox, _ = qr_detector.detectAndDecode(image)
-
-if data:
-    print(f"QR Code Data: {data} {bbox}")
-else:
-    print("No QR code found.")
+if __name__ == "__main__":
+  # Take the image from user
+    image = "bar.jpg"
+    BarcodeReader(image)

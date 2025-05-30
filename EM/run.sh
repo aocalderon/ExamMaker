@@ -1,9 +1,16 @@
 #!/bin/bash
 
-for i in {1..20}
+# Check if argument is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <max_value>"
+  exit 1
+fi
+
+# Loop from 1 to the value of the first argument
+for ((i = 1; i <= $1; i++))
 do
   echo "Exam $i..."
-  /usr/bin/python3 /home/and/MEGA/Work/PUJ/2025-S1/DBS/Midterm3/ExamMaker.py
+  python3 ExamMaker.py
 done
 
 rm exams/*.log

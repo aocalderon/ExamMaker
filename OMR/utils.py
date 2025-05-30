@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+ANSWER_RADIUS = 25
+
 ## TO STACK ALL THE IMAGES IN ONE WINDOW
 def stackImages(imgArray,scale,lables=[]):
     rows = len(imgArray)
@@ -50,8 +52,7 @@ def reorder(myPoints):
     diff = np.diff(myPoints, axis=1)
     myPointsNew[1] =myPoints[np.argmin(diff)]  #[w,0]
     myPointsNew[2] = myPoints[np.argmax(diff)] #[h,0]
-
-    return myPointsNew
+    return(myPointsNew)
 
 def rectContour(contours):
     rectCon = []
@@ -72,50 +73,52 @@ def getCornerPoints(cont):
     approx = cv2.approxPolyDP(cont, 0.02 * peri, True) # APPROXIMATE THE POLY TO GET CORNER POINTS
     return approx
 
-def splitBoxes(img):
-    rows = np.vsplit(img,5)
+def splitBoxes(img, questions, choices):
+    rows = np.vsplit(img, questions) # Split by number of questions...
     boxes=[]
     for r in rows:
-        cols= np.hsplit(r,5)
+        cols= np.hsplit(r, choices) # Split by number of choices...
         for box in cols:
             boxes.append(box)
     return boxes
 
-def drawGrid(img,questions=5,choices=5):
-    secW = int(img.shape[1]/questions)
-    secH = int(img.shape[0]/choices)
-    for i in range (0,9):
-        pt1 = (0,secH*i)
-        pt2 = (img.shape[1],secH*i)
+def drawGrid(img, questions, choices):
+    secW = int(img.shape[1] / choices)
+    secH = int(img.shape[0] / questions)
+    for i in range (0, questions):
+        pt1 = (0, secH * i)
+        pt2 = (img.shape[1], secH * i)
         pt3 = (secW * i, 0)
-        pt4 = (secW*i,img.shape[0])
-        cv2.line(img, pt1, pt2, (255, 255, 0),2)
-        cv2.line(img, pt3, pt4, (255, 255, 0),2)
-
+        pt4 = (secW * i, img.shape[0])
+        cv2.line(img, pt1, pt2, (255, 255, 0), 2)
+        cv2.line(img, pt3, pt4, (255, 255, 0), 2)
     return img
 
-def showAnswers(img,myIndex,grading,ans,questions=5,choices=5):
-     secW = int(img.shape[1]/questions)
-     secH = int(img.shape[0]/choices)
+def showAnswers(img, myIndex, grading, ans, questions, choices):
+     secW = int(img.shape[1] / choices)
+     #print(f"secW = {secW}")
+     secH = int(img.shape[0] / questions)
+     #print(f"secH = {secH}")
 
-     for x in range(0,questions):
+     for x in range(0, questions):
          myAns= myIndex[x]
          cX = (myAns * secW) + secW // 2
          cY = (x * secH) + secH // 2
-         if grading[x]==1:
+         if grading[x] == 1:
             myColor = (0,255,0)
             #cv2.rectangle(img,(myAns*secW,x*secH),((myAns*secW)+secW,(x*secH)+secH),myColor,cv2.FILLED)
-            cv2.circle(img,(cX,cY),50,myColor,cv2.FILLED)
+            cv2.circle(img, (cX,cY), ANSWER_RADIUS, myColor, cv2.FILLED)
          else:
             myColor = (0,0,255)
             #cv2.rectangle(img, (myAns * secW, x * secH), ((myAns * secW) + secW, (x * secH) + secH), myColor, cv2.FILLED)
-            cv2.circle(img, (cX, cY), 50, myColor, cv2.FILLED)
+            cv2.circle(img, (cX, cY), ANSWER_RADIUS, myColor, cv2.FILLED)
 
             # CORRECT ANSWER
             myColor = (0, 255, 0)
             correctAns = ans[x]
-            cv2.circle(img,((correctAns * secW)+secW//2, (x * secH)+secH//2),
-            20,myColor,cv2.FILLED)
+            caX = (correctAns * secW) + secW // 2
+            caY = (x * secH) + secH // 2
+            cv2.circle(img, (caX, caY), ANSWER_RADIUS, myColor, cv2.FILLED)
 
 
 

@@ -1,0 +1,84 @@
+\documentclass[11pt, addpoints, answers]{exam}\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel} % Para idioma español y separación silábica
+\usepackage[many]{tcolorbox} % for COLORED BOXES (tikz and xcolor included)
+\newtcolorbox{MyBox}{
+	fontupper = \bf \color{black}, % font color
+    boxrule = 2pt,
+    colframe = black,
+    rounded corners,
+    arc = 12pt
+}
+\usepackage{qrcode}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=2cm, bottom=3cm}
+
+\begin{document}
+	\input{../code128}
+	\begin{coverpages}
+		\begin{center}
+			\begin{Large}
+				\vspace{-5mm}
+				DBS 3rd Exam
+			\end{Large}
+		\end{center}
+		\vspace{5mm}
+
+		\begin{MyBox}
+			This exam consists of \numpages{} pages, not including this cover page.  Please go through your copy to make sure that all pages are in good order.  The exam consists of a set of short questions with multiple choices. There are \numpoints{} points, total, on this exam. \\
+			Happy solving!
+		\end{MyBox}
+
+		\vspace{10mm}
+		\noindent
+		Name:\enspace\hrulefill \\
+		\\
+		Date:\enspace\hrulefill
+		\vspace{5mm}
+		\begin{center}
+			\includegraphics{../answer_table}
+
+			\vspace{3mm}
+			\leavevmode \hspace{5mm} \codetext{1AF9D0}
+		\end{center}
+	\end{coverpages}
+
+	\footer{} {Page \thepage\ of \numpages} {\iflastpage{3rd exam.}{Please go on to the next page\ldots}}
+
+	\centering
+	\textbf{\Large Pontificia Universidad Javeriana}\\
+	\textbf{\Large Databases} \\
+	\textbf{\large 2025 -- 10} \\
+	\textbf{\large 3rd Exam} \\
+	\textbf{Code: 1AF9D0}
+
+
+	\begin{questions}
+		\input{../DB_Questions/B13}
+		\input{../DB_Questions/C18}
+		\input{../DB_Questions/A17}
+		\input{../DB_Questions/A18}
+		\input{../DB_Questions/B14}
+		\input{../DB_Questions/B10}
+		\input{../DB_Questions/A12}
+		\input{../DB_Questions/C11}
+		\input{../DB_Questions/B18}
+		\input{../DB_Questions/A3}
+		\input{../DB_Questions/A1}
+		\input{../DB_Questions/C19}
+		\input{../DB_Questions/A14}
+		\input{../DB_Questions/A2}
+		\input{../DB_Questions/C13}
+		\input{../DB_Questions/C7}
+		\input{../DB_Questions/A8}
+		\input{../DB_Questions/A19}
+		\input{../DB_Questions/C1}
+		\input{../DB_Questions/B1}
+	\end{questions}
+
+	\vspace{5mm}
+	\noindent \textbf{End of Exam}
+
+\end{document}

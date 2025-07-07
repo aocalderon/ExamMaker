@@ -1,0 +1,227 @@
+\documentclass[11pt, answers, addpoints]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel} % Para idioma español y separación silábica
+\usepackage[many]{tcolorbox} % for COLORED BOXES (tikz and xcolor included)
+\newtcolorbox{MyBox}{
+	fontupper = \bf \color{black}, % font color
+    boxrule = 2pt,
+    colframe = black,
+    rounded corners,
+    arc = 12pt
+}
+\usepackage{qrcode}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=2cm, bottom=3cm}
+
+\begin{document}
+	\input{../code128}
+	\begin{coverpages}
+		\begin{center}
+			\begin{Large}
+				\vspace{-5mm}
+				ADA Exam
+			\end{Large}
+		\end{center}
+		\vspace{5mm}
+
+		\begin{MyBox}
+			This exam consists of \numpages{} pages, not including this cover page.  Please go through your copy to make sure that all pages are in good order.  The exam consists of a set of short questions with multiple choices. There are 20 points, total, on this exam. \\
+			Happy solving!
+		\end{MyBox}
+
+		\vspace{10mm}
+		\noindent
+		Name:\enspace\hrulefill \\
+		\\
+		Date:\enspace\hrulefill
+		\vspace{5mm}
+		\begin{center}
+			\includegraphics{../answer_table}
+
+			\vspace{3mm}
+			\leavevmode \hspace{5mm} \codetext{1AF9D0}
+		\end{center}
+	\end{coverpages}
+
+	\footer{} {Page \thepage\ of \numpages} {\iflastpage{3rd exam.}{Please go on to the next page\ldots}}
+
+	\centering
+	\textbf{\Large Pontificia Universidad Javeriana}\\
+	\textbf{\Large ADA} \\
+	\textbf{\large 2025 -- 10} \\
+	\textbf{\large 3rd Exam} \\
+	\textbf{Code: 1AF9D0}
+
+
+\begin{questions}
+
+\question ¿Cuál es una característica clave de los algoritmos de fuerza bruta?
+\begin{choices}
+\choice Realizan una búsqueda parcial optimizada.
+\CorrectChoice Evalúan todas las posibles soluciones sin podarlas.
+\choice Usan estructura de divide y vencerás para mejorar el rendimiento.
+\choice Solo funcionan con entradas grandes y datos ordenados.
+\end{choices}
+
+\question ¿Qué problema se resuelve comúnmente con fuerza bruta?
+\begin{choices}
+\choice Búsqueda binaria.
+\CorrectChoice Problema del Viajante (TSP).
+\choice Árbol de expansión mínima.
+\choice QuickSort.
+\end{choices}
+
+\question ¿Qué propiedad es esencial para aplicar programación dinámica?
+\begin{choices}
+\choice Aleatoriedad en los datos.
+\CorrectChoice Subproblemas superpuestos.
+\choice Datos en forma de árbol.
+\choice Entrada ya ordenada.
+\end{choices}
+
+\question ¿Cuál es la finalidad principal de usar memoización?
+\begin{choices}
+\choice Reducir uso de memoria.
+\CorrectChoice Evitar cálculos redundantes almacenando resultados.
+\choice Generar pseudocódigo automáticamente.
+\choice Aumentar precisión numérica.
+\end{choices}
+
+\question ¿Qué estrategia se usa en divide y vencerás?
+\begin{choices}
+\choice Eliminar duplicados antes de resolver.
+\CorrectChoice Dividir el problema en subproblemas, resolverlos y combinar.
+\choice Iterar hasta que el input sea vacío.
+\choice Ordenar la entrada antes de iniciar.
+\end{choices}
+
+\question ¿Cuál algoritmo es un ejemplo clásico de divide y vencerás?
+\begin{choices}
+\choice DFS.
+\choice Fuerza bruta para TSP.
+\CorrectChoice MergeSort.
+\choice Knapsack.
+\end{choices}
+
+\question ¿Qué propiedad garantiza que un algoritmo greedy sea óptimo?
+\begin{choices}
+\choice Complejidad logarítmica.
+\CorrectChoice Subestructura óptima.
+\choice Entrada ordenada.
+\choice Uso de árboles binarios.
+\end{choices}
+
+\question ¿Cuál de los siguientes problemas se puede resolver con programación dinámica?
+\begin{choices}
+\choice Dijkstra.
+\CorrectChoice Subset Sum.
+\choice Búsqueda binaria.
+\choice TSP con DFS.
+\end{choices}
+
+\question ¿Qué significa la notación \(\mathcal{O}(n^2)\)?
+\begin{choices}
+\CorrectChoice Cota superior del tiempo de ejecución en el peor caso.
+\choice Cota inferior del tiempo de ejecución.
+\choice Tiempo exacto que toma el algoritmo.
+\choice Espacio de memoria utilizado.
+\end{choices}
+
+\question ¿Qué técnica se usa para verificar la corrección de un algoritmo?
+\begin{choices}
+\choice Analizar el uso de memoria.
+\CorrectChoice Comprobar precondiciones y postcondiciones.
+\choice Reducir el tamaño de la entrada.
+\choice Usar programación orientada a objetos.
+\end{choices}
+
+\question ¿Qué implica una estrategia de poda en backtracking?
+\begin{choices}
+\CorrectChoice Eliminar caminos que no pueden llevar a soluciones válidas.
+\choice Dividir el input en mitades iguales.
+\choice Usar estructuras de árbol AVL.
+\choice Ejecutar el algoritmo más de una vez.
+\end{choices}
+
+\question ¿Cuál es una ventaja de usar pseudocódigo en el diseño de algoritmos?
+\begin{choices}
+\choice Ejecuta más rápido que el código real.
+\CorrectChoice Mejora la claridad y legibilidad del algoritmo.
+\choice Optimiza automáticamente el código.
+\choice Genera pruebas unitarias.
+\end{choices}
+
+\question ¿Qué herramienta ayuda a identificar cuellos de botella en algoritmos?
+\begin{choices}
+\choice Visual Studio Code.
+\CorrectChoice Perfiladores como \texttt{cProfile} o \texttt{gprof}.
+\choice Compiladores.
+\choice Exploradores de archivos.
+\end{choices}
+
+\question ¿Qué notación representa la cota ajustada del tiempo de ejecución?
+\begin{choices}
+\choice \(\Omega(n)\)
+\CorrectChoice \(\Theta(n)\)
+\choice \(\mathcal{O}(n)\)
+\choice \(\delta(n)\)
+\end{choices}
+
+\question ¿Qué algoritmo puede beneficiarse del uso de bitmasking?
+\begin{choices}
+\choice MergeSort.
+\CorrectChoice Solución de Sudoku por backtracking.
+\choice BFS en árboles.
+\choice Dijkstra.
+\end{choices}
+
+\question ¿Qué estrategia mejora la eficiencia de QuickSort?
+\begin{choices}
+\choice Reemplazar por fuerza bruta en todos los casos.
+\CorrectChoice Usar selección aleatoria del pivote.
+\choice Repetir partición tres veces.
+\choice Usar estructuras dinámicas.
+\end{choices}
+
+\question ¿Qué significa una complejidad de \(\mathcal{O}(1)\)?
+\begin{choices}
+\choice El algoritmo no termina nunca.
+\CorrectChoice Tiempo constante, independiente del tamaño de entrada.
+\choice Tiempo cuadrático.
+\choice Tiempo exponencial.
+\end{choices}
+
+\question ¿Cuál es un ejemplo de estructura útil en programación dinámica?
+\begin{choices}
+\choice Árbol binario de búsqueda.
+\CorrectChoice Tabla de memoización.
+\choice Grafo dirigido acíclico.
+\choice Árbol AVL.
+\end{choices}
+
+\question ¿Cuál técnica implica recorrer manualmente un algoritmo con ejemplos concretos?
+\begin{choices}
+\choice Refactorización.
+\CorrectChoice Ejecución en seco (dry run).
+\choice Compilación anticipada.
+\choice Optimización recursiva.
+\end{choices}
+
+\question ¿Qué algoritmo es un ejemplo clásico de greedy?
+\begin{choices}
+\choice MergeSort.
+\CorrectChoice Codificación de Huffman.
+\choice Subset Sum con memoización.
+\choice Floyd-Warshall.
+\end{choices}
+
+\end{questions}
+
+
+	\vspace{5mm}
+	\noindent \textbf{End of Exam}
+
+\end{document}

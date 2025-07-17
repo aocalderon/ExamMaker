@@ -1,21 +1,43 @@
 import cv2
 import numpy as np
 import utils
+import argparse
+from pathlib import Path
+
+parser = argparse.ArgumentParser(description="Process the arguments.")
+parser.add_argument('--exam', type = str, help = 'The exam file', default = "4.jpg")
+parser.add_argument('--answers', type = str, help = 'The answers file', default = "dbs/answers/BE0B55.tsv")
+parser.add_argument('--questions', type = int, help = 'The number of questions', default = 20)
+parser.add_argument('--size', type = int, help = 'The number of questions on answer sheet', default = 20)
+
+args = parser.parse_args()
 
 ##############################################################################
 # Code from https://github.com/murtazahassan/Optical-Mark-Recognition-OPENCV/
 ##############################################################################
-pathImage = "4.jpg"
-heightImg = 1596
-widthImg  = 505
-questions = 21  
+pathImage = args.exam
+questions = args.questions
 choices = 5
-exam_answers = [1,2,0,2,3,1,2,0,2,3,1,2,0,2,3,1,2,0,2,3,2]
+heightImg = 75 * questions
+widthImg  = 100 * choices
+
+answers_path = Path(args.answers)
+answers_records = answers_path.read_text(encoding='utf-8').split("\n")
+answers_letters = [ord(record.split("\t")[2]) - ord('A') for record in answers_records if record.strip()]
+answers_letters.append(-1)
+print(f"Letters: {answers_letters}")
+exam_answers = [1,2,2,1,3,2,1,1,2,3,0,2,0,1,0,0,1,1,1,2] # Answers for DBA exam...
+exam_answers = answers_letters
+W = 950
+H = 1200
 ##############################################################################
 
 img = cv2.imread(pathImage)
+img = cv2.resize(img, (W, H))
+height, width, channels = img.shape
+print(f"Width: {width}, Height: {height}, Channels: {channels}")
+
 imgFinal = img.copy()
-#img = cv2.resize(img, (widthImg, heightImg)) # RESIZE IMAGE
 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # CONVERT IMAGE TO GRAY SCALE
 imgBlur = cv2.GaussianBlur(imgGray, (5, 5), 1) # ADD GAUSSIAN BLUR
 imgCanny = cv2.Canny(imgBlur, 10, 70) # APPLY CANNY
@@ -77,8 +99,11 @@ for x in range(0, questions):
     else:
         grading.append(0)
 print("GRADING", grading)
-score = (sum(grading) / questions) * 100 # FINAL GRADE
+n = len([x for x in exam_answers if x != -1])
+score = (sum(grading) / n) * 100 # FINAL GRADE
+grade = (sum(grading) / n) * 5.0
 print("SCORE  ",score)
+print("GRADE  ",grade)
 
 # DISPLAYING ANSWERS
 utils.showAnswers(imgWarpColored, myIndex, grading, exam_answers, questions, choices) # DRAW DETECTED ANSWERS
@@ -93,4 +118,15 @@ cv2.imwrite('/tmp/raw.jpg', imgRawFinal)
 
 # SHOW ANSWERS AND GRADE ON FINAL IMAGE
 imgFinal = cv2.addWeighted(imgFinal, 1, imgRawFinal, 1, 0)
+org = (W - 250, H - 100)  # Bottom-left corner of the text
+font = cv2.FONT_HERSHEY_SIMPLEX
+fontScale = 1
+color = (255, 0, 0)  # White in BGR
+thickness = 2
+
+# Add text to image
+cv2.putText(imgFinal, f"{score}% [{grade}]", org, font, fontScale, color, thickness)
+
 cv2.imwrite('/tmp/final.jpg', imgFinal)
+filename = Path(pathImage)
+cv2.imwrite(f"{filename.parent}/{filename.stem}_graded.jpg", imgFinal)

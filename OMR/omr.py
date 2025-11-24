@@ -9,6 +9,7 @@ parser.add_argument('--exam', type = str, help = 'The exam file', default = "4.j
 parser.add_argument('--answers', type = str, help = 'The answers file', default = "dbs/answers/BE0B55.tsv")
 parser.add_argument('--questions', type = int, help = 'The number of questions', default = 20)
 parser.add_argument('--size', type = int, help = 'The number of questions on answer sheet', default = 20)
+parser.add_argument('--choices', type = int, help = 'The number of choices per question', default = 5)
 
 args = parser.parse_args()
 
@@ -17,7 +18,7 @@ args = parser.parse_args()
 ##############################################################################
 pathImage = args.exam
 questions = args.questions
-choices = 5
+choices = args.choices
 heightImg = 75 * questions
 widthImg  = 100 * choices
 

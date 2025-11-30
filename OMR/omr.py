@@ -119,14 +119,14 @@ cv2.imwrite('/tmp/raw.jpg', imgRawFinal)
 
 # SHOW ANSWERS AND GRADE ON FINAL IMAGE
 imgFinal = cv2.addWeighted(imgFinal, 1, imgRawFinal, 1, 0)
-org = (W - 250, H - 100)  # Bottom-left corner of the text
+org = (100, H - 100)  # Bottom-left corner of the text
 font = cv2.FONT_HERSHEY_SIMPLEX
 fontScale = 1
 color = (255, 0, 0)  # White in BGR
 thickness = 2
 
 # Add text to image
-cv2.putText(imgFinal, f"{score}% [{grade}]", org, font, fontScale, color, thickness)
+cv2.putText(imgFinal, f"{score:.2f}%", org, font, fontScale, color, thickness)
 
 cv2.imwrite('/tmp/final.jpg', imgFinal)
 filename = Path(pathImage)

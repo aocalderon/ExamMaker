@@ -15,7 +15,6 @@ parser = argparse.ArgumentParser(description="Process the arguments.")
 parser.add_argument('--exam', '-e', type = str, help = 'The exam file', default = "4.jpg")
 parser.add_argument('--answers', '-a', type = str, help = 'The answers file', default = "dbs/answers/BE0B55.tsv")
 parser.add_argument('--questions', '-q', type = int, help = 'The number of questions', default = 20)
-#parser.add_argument('--size', '-s', type = int, help = 'The number of questions on answer sheet', default = 20)
 parser.add_argument('--choices', '-c', type = int, help = 'The number of choices per question', default = 5)
 parser.add_argument('--camfeed', '-f', action=argparse.BooleanOptionalAction, default=False)  # Read frames from the default camera.
 parser.add_argument('--debug', '-d', action=argparse.BooleanOptionalAction, default=False)  # Print capture and answer details.
@@ -106,6 +105,10 @@ while True:
     # Continue with grading only if a suitable rectangular sheet is detected.
     try:
         rectCon = utils.rectContour(contours) # FILTER FOR RECTANGLE CONTOURS
+
+        if len(rectCon) == 0:
+            raise ValueError("No valid answer sheet contour found. Ensure the page borders are visible.")
+        
         biggestPoints = utils.getCornerPoints(rectCon[0]) # GET CORNER POINTS OF THE BIGGEST RECTANGLE
 
         # BIGGEST RECTANGLE WARPING

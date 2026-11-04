@@ -54,18 +54,34 @@ def reorder(myPoints):
     myPointsNew[2] = myPoints[np.argmax(diff)] #[h,0]
     return(myPointsNew)
 
+#def rectContour(contours):
+#    rectCon = []
+#    max_area = 0
+#    for i in contours:
+#        area = cv2.contourArea(i)
+#        if area > 50:
+#            peri = cv2.arcLength(i, True)
+#            approx = cv2.approxPolyDP(i, 0.02 * peri, True)
+#            if len(approx) == 4:
+#                rectCon.append(i)
+#    rectCon = sorted(rectCon, key=cv2.contourArea,reverse=True)
+#    return rectCon
+
 def rectContour(contours):
     rectCon = []
-    max_area = 0
     for i in contours:
         area = cv2.contourArea(i)
-        if area > 50:
+        # Increased threshold to ignore small rectangles like barcodes
+        if area > 50000:
             peri = cv2.arcLength(i, True)
+            # You can also increase the epsilon factor slightly (e.g., 0.02 to 0.03) 
+            # if the page edges are heavily distorted, but 0.02 is usually fine.
             approx = cv2.approxPolyDP(i, 0.02 * peri, True)
             if len(approx) == 4:
                 rectCon.append(i)
-    rectCon = sorted(rectCon, key=cv2.contourArea,reverse=True)
-    #print(len(rectCon))
+    
+    # Sorts descending by area, so index 0 is guaranteed to be the biggest
+    rectCon = sorted(rectCon, key=cv2.contourArea, reverse=True)
     return rectCon
 
 def getCornerPoints(cont):
